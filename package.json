@@ -1,0 +1,12 @@
+{
+  "name": "jsonresume-theme-contempo",
+  "version": "0.0.1",
+  "description": "Theme for JSON Resume",
+  "author": "Dan Barrett",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^2.0.0-alpha.4",
+    "underscore": "^1.6.0",
+    "moment": "^2.8.1"
+  }
+}

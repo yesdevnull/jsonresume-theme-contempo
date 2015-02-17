@@ -3,6 +3,7 @@ var Handlebars = require("handlebars");
 var moment = require("moment");
 var _ = require("underscore");
 
+// From http://stackoverflow.com/a/16315366/3353747
 Handlebars.registerHelper('ifCond', function(cond1, operator, cond2, options) {
 	switch (operator) {
 		case '==' :

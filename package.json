@@ -1,6 +1,6 @@
 {
   "name": "jsonresume-theme-contempo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Theme for JSON Resume",
   "author": "Dan Barrett <dan@danbarrett.com.au>",
   "main": "index.js",

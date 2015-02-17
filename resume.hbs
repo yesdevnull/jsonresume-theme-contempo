@@ -17,94 +17,29 @@
 	<div id="resume">
 
 	{{#resume.basics}}
-	<h1>{{name}}</h1>
-	<h2>{{label}}</h2>
-	<section id="basics">
-		<div class="contact">
-		{{#if website}}
-		<div class="website">
-			<strong>Website</strong>
-			{{website}}
-		</div>
+	<h1 class="title">R&eacute;sum&eacute; of <span>{{name}}</span></h1>
+	{{#location}}
+		<h2 class="location">{{city}}, {{region}}</h2>
+	{{/location}}
+	<ul id="basics">
+		{{#if phone}}
+			<li>{{phone}}</li>
 		{{/if}}
 		{{#if email}}
-		<div class="email">
-			<strong>Email</strong>
-			{{email}}
-		</div>
+			{{#if phone}}
+				<li><strong>&middot;</strong> <a href="mailto:{{email}}">{{email}}</a></li>
+			{{else}}
+				<li><a href="mailto:{{email}}">{{email}}</a></li>
+			{{/if}}
 		{{/if}}
-		{{#if phone}}
-		<div class="phone">
-			<strong>Phone</strong>
-			{{phone}}
-		</div>
+		{{#if website}}
+			{{#if email}}
+				<li><strong>&middot;</strong> <a href="{{website}}">{{website}}</a></li>
+			{{else}}
+				<li><a href="{{website}}">{{website}}</a></li>
+			{{/if}}
 		{{/if}}
-		</div>
-		{{#if summary}}
-		<div class="summary">
-			<p>{{summary}}</p>
-		</div>
-		{{/if}}
-		{{#location}}
-		<h3>Location</h3>
-		<section id="location">
-			{{#if address}}
-			<div class="address">
-				<strong>Address</strong>
-				{{address}}
-			</div>
-			{{/if}}
-			{{#if postalCode}}
-			<div class="postalCode">
-				<strong>Postal code</strong>
-				{{postalCode}}
-			</div>
-			{{/if}}
-			{{#if city}}
-			<div class="city">
-				<strong>City</strong>
-				{{city}}
-			</div>
-			{{/if}}
-			{{#if countryCode}}
-			<div class="countryCode">
-				<strong>Country code</strong>
-				{{countryCode}}
-			</div>
-			{{/if}}
-			{{#if region}}
-			<div class="region">
-				<strong>Region</strong>
-				{{region}}
-			</div>
-			{{/if}}
-		</section>
-		{{/location}}
-		{{#if profiles.length}}
-		<h3>Profiles</h3>
-		<section id="profiles">
-			{{#each profiles}}
-			<div class="item">
-				{{#if network}}
-				<strong class="network">
-					{{network}}
-				</strong>
-				{{/if}}
-				{{#if username}}
-				<div class="username">
-					{{username}}
-				</div>
-				{{/if}}
-				{{#if url}}
-				<div class="url">
-					<a href="{{url}}">Link</a>
-				</div>
-				{{/if}}
-			</div>
-			{{/each}}
-		</section>
-		{{/if}}
-	</section>
+	</ul>
 	{{/resume.basics}}
 
 	{{#if resume.work.length}}
@@ -112,7 +47,7 @@
 		<h2>Employment History</h2>
 		{{#each resume.work}}
 		<div class="item">
-			{{#ifCond position company}}
+			{{#ifCond position '||' company}}
 				<h3>
 					{{#if position}}{{position}}{{/if}}{{#if company}}<span>, {{company}}</span>{{/if}}
 				</h3>
@@ -195,22 +130,11 @@
 		<h2>Education</h2>
 		{{#each resume.education}}
 		<div class="item">
-			<div class="date">
-				{{#if startDate}}
-				<span class="startDate">
-					{{startDate}}
-				</span>
-				{{/if}}
-				{{#if endDate}}
-				<span class="endDate">
-					- {{endDate}}
-				</span>
-				{{else}}
-				<span class="endDate">
-					- Present
-				</span>
-				{{/if}}
-			</div>
+			{{#if completed}}
+				<div class="date">
+					{{completed}}
+				</div>
+			{{/if}}
 			{{#if institution}}
 			<div class="institution">
 				{{institution}}
@@ -225,18 +149,6 @@
 			<div class="studyType">
 				{{studyType}}
 			</div>
-			{{/if}}
-			{{#if gpa}}
-			<div class="gpa">
-				GPA: {{gpa}}
-			</div>
-			{{/if}}
-			{{#if courses.length}}
-			<ul class="courses">
-				{{#each courses}}
-				<li>{{.}}</li>
-				{{/each}}
-			</ul>
 			{{/if}}
 		</div>
 		{{/each}}

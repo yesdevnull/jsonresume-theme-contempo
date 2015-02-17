@@ -3,8 +3,20 @@ var Handlebars = require("handlebars");
 var moment = require("moment");
 var _ = require("underscore");
 
-Handlebars.registerHelper('ifCond', function(cond1, cond2, options) {
-	return (cond1 || cond2) ? options.fn(this) : options.inverse(this);
+Handlebars.registerHelper('ifCond', function(cond1, operator, cond2, options) {
+	switch (operator) {
+		case '==' :
+			return (cond1 == cond2) ? options.fn(this) : options.inverse(this);
+		break;
+
+		case '&&' :
+			return (cond1 && cond2) ? options.fn(this) : options.inverse(this);
+		break;
+
+		case '||' :
+			return (cond1 || cond2) ? options.fn(this) : options.inverse(this);
+		break;
+	}
 });
 
 function render(resume) {
@@ -20,16 +32,22 @@ function render(resume) {
 		}
 
 		if (endDate) {
-			work_info.time = work_info.time + ' &mdash; ' + moment(endDate).format('MMM YYYY');
+			work_info.time = work_info.time + ' – ' + moment(endDate).format('MMM YYYY');
 		}
 
 		if (startDate && !endDate) {
-			work_info.time = work_info.time + ' &mdash; Present';
+			work_info.time = work_info.time + ' – Present';
 		}
 
 		if (!startDate && !endDate) {
 			work_info.time = '';
 		}
+	});
+
+	_.each(resume.education, function(education_info) {
+		var endDate = education_info.endDate && new Date(education_info.endDate);
+
+		education_info.completed = 'Completed ' + moment(endDate).format('MMMM YYYY');
 	});
 
 	return Handlebars.compile(tpl)({

@@ -47,7 +47,13 @@ function render(resume) {
 	_.each(resume.education, function(education_info) {
 		var endDate = education_info.endDate && new Date(education_info.endDate);
 
-		education_info.completed = 'Completed ' + moment(endDate).format('MMMM YYYY');
+		education_info.completed = moment(endDate).format('MMMM YYYY');
+	});
+
+	_.each(resume.awards, function(award_info) {
+		var date = award_info.date && new Date(award_info.date);
+
+		award_info.awarded = moment(date).format('YYYY');
 	});
 
 	return Handlebars.compile(tpl)({
